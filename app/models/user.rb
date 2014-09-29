@@ -1,3 +1,5 @@
 class User < ActiveRecord::Base
-	validates :email, presence: true
+	before_save { self.email = email.downcase }
+	validates :email, presence: true, uniqueness: true
+	validates :password, presence: true, confirmation: true
 end
